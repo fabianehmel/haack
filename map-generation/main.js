@@ -18,7 +18,7 @@ const { FilledLayer } = require("./modules/layers/FilledLayer");
 const { LevelLayer } = require("./modules/layers/LevelLayer");
 
 // load the config from file
-const CONFIG_FILE = "config.low";
+const CONFIG_FILE = process.argv[2] || "config";
 let { config: CONFIG } = require(`./${CONFIG_FILE}`);
 
 CONFIG.title = `map_${new Date(Date.now()).toISOString()}`;

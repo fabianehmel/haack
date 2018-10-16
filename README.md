@@ -10,7 +10,20 @@ Install the requirements by running `npm install` in the root directory.
 
 ### Map Generation (`map-generation`)
 
-A node application that creates a map for given GeoJSON data. Uses d3 and it's projections.
+_TLDR: A node application that creates a map for given GeoJSON data. Uses d3 and it's projections._
+
+The map generation is controlled with a config file, see the file `config.example.js` as an example. The config file sets the dimensions of the map, the file paths (for export and GeoJSON data) and the layers.
+
+#### Layer types
+
+The tool supports these layer types:
+
+- `filled` — a filled layer, consisting of a a single GeoJSON
+- `stroked` — an outlined layer, consisting of a a single GeoJSON
+- `levels` — a series of filled levels, consisting of a set of GeoJSONs
+
+Please see the `config.example.js` for a reference how to use these layers. The config files need to be placed in the folder `map-generation`.
+To run the script, use the command `npm run map-generation` in the root directory. By default, the script will look for a `config.js` file in the folder `map-generation`. If you want to use another file, provide it's name as a argument like this: `npm run map-generation my.special.config`.
 
 ### Data Processing (`data-processing`)
 
@@ -39,5 +52,5 @@ These settings can be tweaked in the section `your settings` in the file `data-p
 
 ## Central folders
 
-By default, the tools use a common data folder at `data`.
+By default, the tools use a common data folder at `data`. Exported maps are saved in the folder `export`.
 Also, a folder called `temp` is used in the root directory for temporary files.

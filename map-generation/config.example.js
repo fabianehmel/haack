@@ -4,7 +4,8 @@ exports.config = {
     width: 1000
   },
   projection: {
-    name: "mercator"
+    name: "mercator",
+    settings: { aD3ProjectionSetting: 0 }
   },
   filepaths: {
     data: "data/",
@@ -12,7 +13,7 @@ exports.config = {
   },
   layers: [
     {
-      type: "dem",
+      type: "levels",
       properties: {
         path: "path/to/levels/in/geojson/format",
         color: {
