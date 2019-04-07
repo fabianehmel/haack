@@ -1,6 +1,5 @@
 const fs = require("fs");
-const Canvas = require("canvas");
-const cliSpinners = require("cli-spinners");
+const { createCanvas } = require('canvas');
 const ora = require("ora");
 const { ColorGenerator } = require("./ColorGenerator");
 const d3 = Object.assign(
@@ -75,7 +74,7 @@ class Renderer {
   }
 
   createCanvas() {
-    this.canvas = new Canvas(this.width, this.height);
+    this.canvas = createCanvas(this.width, this.height);
     this.context = this.canvas.getContext("2d");
     this.context.clearRect(0, 0, this.width, this.height);
   }
@@ -123,9 +122,6 @@ class Renderer {
     const colorScheme = item.getChroma();
     const path = item.getPath();
     const easing = item.getColorEasing();
-
-    // const renderSpinner = ora({ text: `Rendering LayerList for path ${path}…`, spinner: cliSpinners.earth })
-    // renderSpinner.start()
 
     const cG = new ColorGenerator();
     cG.setColorScheme(colorScheme);

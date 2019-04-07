@@ -56,23 +56,23 @@ class LevelLayer extends Layer {
 
       // defines color
       if (
-        attr.hasOwnProperty("color") &&
-        attr.color !== null &&
-        typeof attr.color === "object"
+        attr.style.hasOwnProperty("color") &&
+        attr.style.color !== null &&
+        typeof attr.style.color === "object"
       ) {
         // easing
         if (
-          attr.color.hasOwnProperty("easing") &&
-          Array.isArray(attr.color.easing)
+          attr.style.color.hasOwnProperty("easing") &&
+          Array.isArray(attr.style.color.easing)
         ) {
-          this.colorEasing = attr.color.easing;
+          this.colorEasing = attr.style.color.easing;
         }
         // scale
         if (
-          attr.color.hasOwnProperty("scale") &&
-          Array.isArray(attr.color.scale)
+          attr.style.color.hasOwnProperty("scale") &&
+          Array.isArray(attr.style.color.scale)
         ) {
-          this.colorScale = attr.color.scale;
+          this.colorScale = attr.style.color.scale;
         }
       }
 

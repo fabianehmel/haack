@@ -1,17 +1,8 @@
 // node modules
 const fs = require("fs");
-const d3 = Object.assign(
-  {},
-  require("d3"),
-  require("d3-scale"),
-  require("d3-geo"),
-  require("d3-geo-projection"),
-  require("d3-geo-graticule")
-);
 
 // Internal Modules
 const { Renderer } = require("./modules/Renderer");
-const { ColorGenerator } = require("./modules/ColorGenerator");
 const { Layer } = require("./modules/layers/Layer");
 const { StrokedLayer } = require("./modules/layers/StrokedLayer");
 const { FilledLayer } = require("./modules/layers/FilledLayer");

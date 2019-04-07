@@ -1,5 +1,3 @@
-const fs = require("fs");
-const chroma = require("chroma-js");
 const bezierEasing = require("bezier-easing");
 
 function mapValue(rangeIn, rangeOut, value) {

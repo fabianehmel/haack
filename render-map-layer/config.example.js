@@ -5,7 +5,10 @@ exports.config = {
   },
   projection: {
     name: "mercator",
-    settings: { aD3ProjectionSetting: 0 }
+    settings: { 
+      rotate: [0, 0],
+      precision: 0
+    }
   },
   filepaths: {
     data: "data/",

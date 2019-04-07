@@ -7,14 +7,10 @@ let d3 = Object.assign(
   require("d3-geo-projection")
 );
 
-let topojson = require("topojson-client");
 let fs = require("fs");
-
-const BASE_FILEPATH = "data/json/";
 
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const { document } = new JSDOM("<!doctype html>").window;
 
 //SVG dimensions
 const width = 30000;
@@ -31,15 +27,15 @@ const projection = d3
   .precision(0.1);
 const path = d3.geoPath(projection);
 
-const ne_10m_geography_regions_polys = JSON.parse(
+const inputFile = JSON.parse(
   fs.readFileSync(
-    "ne_10m_geography_marine_polys_4.0.0_centerlines.geojson",
+    "./data/cities_maxSR2.geojson",
     "utf8"
   )
 );
 
 let features = [];
-ne_10m_geography_regions_polys.features.forEach(function(item) {
+inputFile.features.forEach(function(item) {
   item.properties.featurecla = item.properties.featurecla.replace("/", "_");
   features[item.properties.featurecla] =
     features[item.properties.featurecla] || [];
@@ -61,9 +57,6 @@ function createForArray(arr, featurecla, scalerank) {
     .attr("width", width)
     .attr("height", height)
     .attr("xmlns", "http://www.w3.org/2000/svg");
-  // .attr("xmlns:xlink", "http://www.w3.org/1999/xlink");
-
-  // let defs = svg.append("defs");
 
   const outname = featurecla + "_" + scalerank;
   let container = svg.append("g").attr("id", outname);
@@ -100,7 +93,7 @@ function createForArray(arr, featurecla, scalerank) {
       });
   }
 
-  const outfile = `out_marine/${outname}.svg`;
+  const outfile = `./data/city_labels/${outname}.svg`;
 
   let outdata = document.body.firstChild.outerHTML;
   let outdata_fixed = outdata.replace(/textpath/gi, "textPath");

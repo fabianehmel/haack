@@ -6,9 +6,13 @@ A collection of tools to generate static maps using open source technology.
 
 Install the requirements by running `npm install` in the root directory.
 
+### Additional Requirements
+
+If you want to process the ETOPO1 data, make sure that GDAL (https://www.gdal.org/) is installed.
+
 ## Included tools
 
-### Map Generation (`map-generation`)
+### Map Generation (`render-map-layer`)
 
 _TLDR: A node application that creates a map for given GeoJSON data. Uses d3 and it's projections._
 
@@ -22,8 +26,8 @@ The tool supports these layer types:
 - `stroked` — an outlined layer, consisting of a a single GeoJSON
 - `levels` — a series of filled levels, consisting of a set of GeoJSONs
 
-Please see the `config.example.js` for a reference how to use these layers. The config files need to be placed in the folder `map-generation`.
-To run the script, use the command `npm run map-generation` in the root directory. By default, the script will look for a `config.js` file in the folder `map-generation`. If you want to use another file, provide it's name as a argument like this: `npm run map-generation my.special.config`.
+Please see the `config.example.js` for a reference how to use these layers. The config files need to be placed in the folder `render-map-layer`.
+To run the script, use the command `npm run render-map-layer` in the root directory. By default, the script will look for a `config.js` file in the folder `render-map-layer`. If you want to use another file, provide it's name as a argument like this: `npm run render-map-layer my.special.config`.
 
 ### ETOPO1 Data Processing (`process-etopo1-data`)
 
@@ -42,13 +46,9 @@ This shell script automatically downloads the GeoTIFF dataset and converts it to
 - `many more landmass files…`
 - `9000.GeoJSON`
 
-These settings can be tweaked in the section `your settings` in the file `process-etopo1-data/run.sh`.
+These settings can be tweaked in the section `your settings` in the file `process-etopo1-data/main.sh`.
 
 **Attention: Depending on the settings and your machine, this script might take several hours to run!**
-
-#### Requirements
-
-- GDAL (https://www.gdal.org/)
 
 ## Central folders
 
