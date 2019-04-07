@@ -5,18 +5,27 @@
 # PARAMETERS
 # ----------------------
 
-# your settings
-startLevel=-10000	# sea level
-endLevel=9000	# top of the world
-resolution=100	# desired resolution between levels in meter
+# levels (in meter)
+startLevel=-10000
+endLevel=9000
+
+# desired resolution between levels in meter
+resolution=20
 
 # our iterator variable
 currentLevel="$startLevel"
 
+# available ETOPO1 variantes
+etopo1_bed = "ETOPO1_Bed"
+etopo1_ice = "ETOPO1_Ice"
+
+# either etopo1_bed or etopo1_ice
+etopo1_variant=_getopo1_bed
+
 # folders
-folder_base="../data"
-folder_temp="../temp"
-folder_out=$folder_base"/levels"
+folder_base="./data"
+folder_temp="./temp"
+folder_out=$folder_base"/levels_bed"
 folder_in=$folder_base"/ETOPO1"
 
 # Create these directorys if they don't exist
@@ -26,9 +35,9 @@ mkdir -p $folder_out
 mkdir -p $folder_in
 
 # files
-geotiff_in=$folder_in/"ETOPO1_Ice_g_geotiff.tif"
-geotiff_cropped=$folder_in/"crop.tif"
-zip_in=$folder_in/"ETOPO1_Ice_g_geotiff.zip"
+geotiff_in=$folder_in/$etopo1_variant"_geotiff.tif"
+geotiff_cropped=$folder_in/$etopo1_variant"_crop.tif"
+zip_in=$folder_in/$etopo1_variant"_geotiff.zip"
 
 # number of parallel processes
 # defines how many levels are processed at the same time
@@ -84,7 +93,7 @@ processSingleLevel () {
         echo "Level $currentLevelLocal — Generating GeoTiff"
         gdal_calc.py -A "$geotiff_cropped" --outfile="$folder_temp"/level"$currentLevelLocal".tif --calc="A>=$currentLevelLocal" --NoDataValue=0
 
-        echo "Level $currentLevelLocal — Polygonize"
+        # echo "Level $currentLevelLocal — Polygonize"
         # create polygon-shapefile of current level from geotiff
         gdal_polygonize.py "$folder_temp"/level"$currentLevelLocal".tif -f "ESRI Shapefile" "$folder_temp"/level"$currentLevelLocal".shp level"$currentLevelLocal" elev
 
@@ -163,7 +172,7 @@ checkForOriginalZip () {
 # downloads zip from NOAA
 downloadOriginalZip () {
     echo "Zip File with geodata does not exist. Downloading it…"
-    curl --output $zip_in https://www.ngdc.noaa.gov/mgg/global/relief/ETOPO1/data/ice_surface/grid_registered/georeferenced_tiff/ETOPO1_Ice_g_geotiff.zip
+    curl --output $zip_in https://www.ngdc.noaa.gov/mgg/global/relief/ETOPO1/data/bedrock/grid_registered/georeferenced_tiff/"$etopo1_variant"_g_geotiff.zip
 }
 
 

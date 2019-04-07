@@ -25,13 +25,13 @@ The tool supports these layer types:
 Please see the `config.example.js` for a reference how to use these layers. The config files need to be placed in the folder `map-generation`.
 To run the script, use the command `npm run map-generation` in the root directory. By default, the script will look for a `config.js` file in the folder `map-generation`. If you want to use another file, provide it's name as a argument like this: `npm run map-generation my.special.config`.
 
-### Data Processing (`data-processing`)
+### ETOPO1 Data Processing (`process-etopo1-data`)
 
-_TLDR: A Shell script that downloads and prepares the elevation data for the mapping process. Delivers a set of GeoJSONs for different elevation levels. Run it with `npm run data-processing` in the root directory._
+_TLDR: A Shell script that downloads and prepares the elevation data for the mapping process. Delivers a set of GeoJSONs for different elevation levels. Run it with `npm run process-etopo1-data` in the root directory._
 
 If a map should contain elevation levels, data from a digital elevation model (DEM) is needed. The NOAA provides such a model in the GeoTIFF format. This file can be processed to a series of GeoJSONs that can be used by D3 to generate a map.
 
-This shell script automatically downloads the GeoTIFF dataset and converts it to GeoJSON files. The script can be called with the command `npm run data-processing` in the root directory. By default, it generates GeoJSONs for each hundred meter level, starting from -10000 meters (sea ground) to 9000 meters (Himalaya). The resulting files are therefore:
+This shell script automatically downloads the GeoTIFF dataset and converts it to GeoJSON files. The script can be called with the command `npm run process-etopo1-data` in the root directory. By default, it generates GeoJSONs for each hundred meter level, starting from -10000 meters (sea ground) to 9000 meters (Himalaya). The resulting files are therefore:
 
 - `-10000.geojson` (lowest sea level)
 - `-9900.geojson`
@@ -42,7 +42,7 @@ This shell script automatically downloads the GeoTIFF dataset and converts it to
 - `many more landmass files…`
 - `9000.GeoJSON`
 
-These settings can be tweaked in the section `your settings` in the file `data-processing/init.sh`.
+These settings can be tweaked in the section `your settings` in the file `process-etopo1-data/run.sh`.
 
 **Attention: Depending on the settings and your machine, this script might take several hours to run!**
 
